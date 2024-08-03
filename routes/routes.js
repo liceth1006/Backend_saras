@@ -1,0 +1,27 @@
+import express from 'express';
+import { login,register,profile,refreshToken,logout } from '../controllers/authController.js';
+import { createActivity, readActivity } from '../controllers/activityController.js'
+import { requireToken } from "../middlewares/requireToken.js";
+import { requireRefreshToken } from "../middlewares/requireRefreshToken.js";
+import {bodyLoginrValidator,bodyRegisterValidator} from "../middlewares/validationManager.js";
+
+const router = express.Router();
+
+// Ruta para crear una nueva actividad
+router.post('/activiy', createActivity);
+// Ruta para leer todas las actividades
+router.get('/activiy', readActivity);
+
+// Ruta para iniciar sesión
+ router.post('/login', login);
+// Ruta para registrar un nuevo usuario
+router.post('/register', register);
+
+//ruta informacion usuario - perfil
+router.get('/profile',requireToken,profile)
+//renueva el token
+router.get("/refresh", requireRefreshToken, refreshToken);
+
+// Ruta para salir de la sesion
+router.get('/logout', logout);
+export default router;
