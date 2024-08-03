@@ -1,5 +1,7 @@
 import User from "../models/userModels.js";
 import Person from "../models/personModels.js";
+import Employees from "../models/employeesModels.js";
+import Beneficiary from "../models/beneficiariesModels.js";
 import "../models/associations.js";
 import { generateRefreshToken, generateToken } from "../utils/tokenManager.js";
 
@@ -13,11 +15,9 @@ export const login = async (req, res) => {
 
     // Validación de entrada
     if (!use_mail || !use_password) {
-      return res
-        .status(400)
-        .json({
-          error: "login Correo electrónico y contraseña son requeridos",
-        });
+      return res.status(400).json({
+        error: "login Correo electrónico y contraseña son requeridos",
+      });
     }
 
     // Buscar el usuario en la base de datos
@@ -33,6 +33,20 @@ export const login = async (req, res) => {
       return res
         .status(403)
         .json({ error: "Login Contraseña incorrecta", use_password });
+
+    // Obtener el rol del usuario desde la tabla `beneficiaries` o `employees`
+    // Obtener la persona asociada al usuario
+    const person = await Person.findOne({ where: { use_id: user.use_id } });
+    let userRole = null;
+    if (await Beneficiary.findOne({ where: { per_id: person.per_id } })) {
+      userRole = "beneficiary";
+    } else if (await Employees.findOne({ where: { per_id: person.per_id } })) {
+      userRole = "employee";
+    }
+
+    if (!userRole) {
+      return res.status(404).json({ error: "Rol de usuario no encontrado" });
+    }
 
     // Generar tokens
     const { token, expiresIn } = generateToken(user.use_id);
@@ -60,6 +74,7 @@ export const register = async (req, res) => {
     doc_typ_id,
     use_mail,
     use_password,
+    use_role,
   } = req.body;
 
   try {
@@ -72,7 +87,8 @@ export const register = async (req, res) => {
       !per_birthdate ||
       !doc_typ_id ||
       !use_mail ||
-      !use_password
+      !use_password ||
+      !use_role
     ) {
       return res.status(400).json({ error: "Todos los campos son requeridos" });
     }
@@ -102,6 +118,20 @@ export const register = async (req, res) => {
       doc_typ_id,
       use_id: newUser.use_id, // Relaciona la persona con el usuario
     });
+
+    // Crear el registro en la tabla correspondiente según el rol del usuario
+    if (use_role === "beneficiary") {
+      await Beneficiary.create({
+        per_id: newPerson.per_id,
+      });
+    } else if (use_role === "employee") {
+      await Employees.create({
+        per_id: newPerson.per_id,
+        emp_status: 0,
+      });
+    } else {
+      return res.status(400).json({ error: "Rol de usuario no válido" });
+    }
 
     // Generar los tokens JWT
     const { token, expiresIn } = generateToken(newUser.use_id);
