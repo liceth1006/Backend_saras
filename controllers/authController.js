@@ -52,7 +52,7 @@ export const login = async (req, res) => {
     const { token, expiresIn } = generateToken(user.use_id);
     generateRefreshToken(user.use_id, res);
 
-    return res.json({ token, expiresIn });
+    return res.json({ token, expiresIn,userRole });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Error del servidor" });
@@ -120,11 +120,11 @@ export const register = async (req, res) => {
     });
 
     // Crear el registro en la tabla correspondiente según el rol del usuario
-    if (use_role === "beneficiary") {
+    if (use_role === "1") {
       await Beneficiary.create({
         per_id: newPerson.per_id,
       });
-    } else if (use_role === "employee") {
+    } else if (use_role === "2") {
       await Employees.create({
         per_id: newPerson.per_id,
         emp_status: 0,
