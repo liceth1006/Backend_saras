@@ -1,4 +1,5 @@
 import express from "express";
+import {readProject} from '../controllers/projectController.js'
 import {
   login,
   register,
@@ -21,9 +22,11 @@ import { readDocumentTypes } from "../controllers/documentTypesController.js";
 const router = express.Router();
 
 // Ruta para crear una nueva actividad
-router.post("/activiy", createActivity);
+router.post("/activiy",requireToken, createActivity);
+
 // Ruta para leer todas las actividades
 router.get("/activiy", readActivity);
+router.get("/project", readProject);
 router.get("/exclusions", readExclusions);
 router.get("/documentTypes", readDocumentTypes);
 
