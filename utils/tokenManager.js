@@ -6,21 +6,21 @@ export const generateToken = (userId) => {
   if (!process.env.JWT_SECRET) {
     throw new Error('JWT_SECRET not defined');
   }
-  const token = jwt.sign({ use_id: userId }, process.env.JWT_SECRET, { expiresIn: '1h' });
-  return { token, expiresIn: '1h' };
+  const token = jwt.sign({ use_id: userId }, process.env.JWT_SECRET, { expiresIn: 900 });
+  return { token, expiresIn: 900 };
 };
-
-// Generar el token de refresco
 export const generateRefreshToken = (userId, res) => {
   if (!process.env.JWT_REFRESH_SECRET) {
     throw new Error('JWT_REFRESH_SECRET not defined');
   }
-  const refreshToken = jwt.sign({ use_id: userId }, process.env.JWT_REFRESH_SECRET, { expiresIn: '7d' });
-  
-  // Configurar la cookie
+
+  console.log("Clave secreta:", process.env.JWT_REFRESH_SECRET); // Para depuración
+  const refreshToken = jwt.sign({ use_id: userId }, process.env.JWT_REFRESH_SECRET, { expiresIn: 1000 });
+  console.log("Token generado:", refreshToken);
+
   res.cookie('refreshToken', refreshToken, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production', // Solo para HTTPS en producción
+    secure: process.env.MODO === 'production', // Solo para HTTPS en producción
     sameSite: 'strict', // Solo enviar cookies para el mismo sitio
     maxAge: 7 * 24 * 60 * 60 * 1000 // 7 días
   });

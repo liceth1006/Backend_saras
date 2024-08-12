@@ -19,6 +19,7 @@ import {
 } from "../middlewares/validationManager.js";
 import { readExclusions } from "../controllers/exclusionsController.js";
 import { readDocumentTypes } from "../controllers/documentTypesController.js";
+import { getBeneficiaryDetails } from "../controllers/beneficiaryInformationController.js";
 const router = express.Router();
 
 // Ruta para crear una nueva actividad
@@ -39,6 +40,9 @@ router.post("/register", register);
 router.get("/profile", requireToken, profile);
 //renueva el token
 router.get("/refresh", requireRefreshToken, refreshToken);
+
+router.get('/beneficiary/:userId',requireToken, getBeneficiaryDetails);
+
 
 // Ruta para salir de la sesion
 router.get("/logout", logout);

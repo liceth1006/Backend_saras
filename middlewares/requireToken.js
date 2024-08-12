@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import 'dotenv/config';
 import { tokenVerificationErrors } from "../utils/tokenManager.js";
 
 export const requireToken = (req, res, next) => {
