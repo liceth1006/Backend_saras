@@ -1,4 +1,4 @@
-import Activity from "../models/activities.js";
+import Activity from "../models/activitiesModels.js";
 
 export const createActivity = async (req, res) => {
   const { acti_code, acti_name } = req.body;

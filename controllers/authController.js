@@ -2,7 +2,6 @@ import User from "../models/userModels.js";
 import Person from "../models/personModels.js";
 import Employees from "../models/employeesModels.js";
 import Beneficiary from "../models/beneficiariesModels.js";
-import "../models/associations.js";
 import { generateRefreshToken, generateToken } from "../utils/tokenManager.js";
 
 /* Esta función maneja el inicio de sesión de un usuario.
