@@ -1,5 +1,5 @@
-import GenderIssues from '../models/genderIssuesModel.js'; // Asegúrate de que la ruta sea correcta
-import BeneInfo from '../models/beneInfoModel.js'; // Asegúrate de que la ruta sea correcta
+import GenderIssues from '../models/genderIssuesModels.js'; 
+import BeneficiaryInformation from '../models/beneficiaryInformationModels.js'; // Asegúrate de que la ruta sea correcta
 
 // Crear un nuevo registro de problemas de género
 export const postGenderIssues = async (req, res) => {
@@ -30,11 +30,11 @@ export const postGenderIssues = async (req, res) => {
     }
 
     // Verificar que la información de beneficiario exista
-    const beneInfo = await BeneInfo.findOne({
+    const beneficiaryInformation = await BeneficiaryInformation.findOne({
       where: { bene_info_id }
     });
 
-    if (!beneInfo) {
+    if (!beneficiaryInformation) {
       return res.status(404).json({ error: "Información de beneficiario no encontrada para el ID proporcionado" });
     }
 
