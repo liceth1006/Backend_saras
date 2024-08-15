@@ -52,14 +52,7 @@ const BeneficiaryInformation = sequelize.define('BeneficiaryInformation', {
       key: 'sector_id'
     }
   },
-  project_types_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'project_types',
-      key: 'project_types_id'
-    }
-  },
+
   credit_value: {
     type: DataTypes.DECIMAL,
     allowNull: false
@@ -68,5 +61,7 @@ const BeneficiaryInformation = sequelize.define('BeneficiaryInformation', {
   tableName: 'beneficiaries_information',
   timestamps: false
 });
+
+
 
 export default BeneficiaryInformation;
