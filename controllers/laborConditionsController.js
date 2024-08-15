@@ -1,5 +1,5 @@
-import LaborConditions from '../models/laborConditionsModel.js'; // Asegúrate de que la ruta sea correcta
-import BeneficiaryInformation from '../models/beneficiaryInformationModels.js'; // Asegúrate de que la ruta sea correcta
+import LaborConditions from '../models/laborConditionsModels.js'
+import BeneficiaryInformation from '../models/beneficiaryInformationModels.js'; 
 
 // Crear un nuevo registro de condiciones laborales
 export const postLaborConditions = async (req, res) => {

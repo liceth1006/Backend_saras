@@ -8,11 +8,11 @@ const CommunityHealthSafety = sequelize.define('CommunityHealthSafety', {
     autoIncrement: true,
     allowNull: false
   },
-  investment_project_id: {
+  project_investment_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'investment_projects', 
+      model: 'investment_projects',
       key: 'investment_project_id'
     }
   },

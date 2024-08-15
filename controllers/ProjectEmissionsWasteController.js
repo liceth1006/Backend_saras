@@ -4,7 +4,7 @@ import InvestmentProject from '../models/investmentProjectModels.js';
 // Crear un nuevo registro de emisiones y residuos del proyecto
 export const postProjectEmissionsWaste = async (req, res) => {
   const {
-    project_investment_id,  // Asegúrate de que el nombre del campo coincida con el de la base de datos
+    project_investment_id,  
     affected_by_natural_events,
     generates_air_emissions,
     measures_carbon_footprint,
@@ -21,7 +21,7 @@ export const postProjectEmissionsWaste = async (req, res) => {
   try {
     // Verificar que todos los campos requeridos estén presentes
     if (
-      !project_investment_id || // Corregido aquí
+      !project_investment_id || 
       !affected_by_natural_events ||
       !generates_air_emissions ||
       !measures_carbon_footprint ||

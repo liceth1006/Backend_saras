@@ -41,6 +41,9 @@ import { postGenderIssues } from "../controllers/genderIssuesController.js";
 import { postCommunityHealthSafety } from "../controllers/communityHealthSafetyController.js";
 import { postProjectEmissionsWaste } from "../controllers/ProjectEmissionsWasteController.js";
 import { postProjectInputs } from "../controllers/ProjectInputsController.js";
+import { postLaborConditions } from "../controllers/laborConditionsController.js";
+import { postProjectArea } from "../controllers/projectAreasController.js";
+import { readAreasOfInterest } from "../controllers/areasOfInterestController.js";
 const router = express.Router();
 
 // Ruta para crear una nueva actividad
@@ -73,7 +76,13 @@ router.post(
   requireToken,
   postProjectEmissionsWaste
 );
+router.post(
+  "/labor-conditions",
+  requireToken,
+  postLaborConditions
+);
 router.post("/project-inputs", requireToken, postProjectInputs);
+router.post('/project-areas', postProjectArea);
 // Ruta para leer  datos (get) que no requiere token
 router.get("/documentTypes", readDocumentTypes);
 
@@ -89,7 +98,7 @@ router.get("/land-uses", readLandUses);
 router.get("/soil-types", readSoilTypes);
 router.get("/type-categories", readTypeCategories);
 router.get("/environmental-management/:id", getEnvironmentalManagementDetails);
-
+router.get('/areas-of-interest', readAreasOfInterest);
 //ruta informacion usuario - perfil
 router.get("/profile", requireToken, profile);
 
