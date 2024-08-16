@@ -28,7 +28,7 @@ import { readProjectTypes } from "../controllers/projectTypesController.js";
 import { readSectors } from "../controllers/sectorsController.js";
 import { readLocations } from "../controllers/locationController.js";
 import { readLandUses } from "../controllers/LandUseController.js";
-import { readSoilTypes } from "../controllers/soilTypeController,js";
+import { readSoilTypes } from "../controllers/soilTypeController.js";
 import { postInvestmentProject } from "../controllers/investmentProjectController.js";
 import { readTypeCategories } from "../controllers/typeCategoryController.js";
 import {
@@ -44,6 +44,12 @@ import { postProjectInputs } from "../controllers/ProjectInputsController.js";
 import { postLaborConditions } from "../controllers/laborConditionsController.js";
 import { postProjectArea } from "../controllers/projectAreasController.js";
 import { readAreasOfInterest } from "../controllers/areasOfInterestController.js";
+import { postCreditBeneficiaryEnvironmentalInfo } from "../controllers/CreditBeneficiaryEnvironmentController.js";
+import { postProjectCapitalEmissions } from "../controllers/projectCapitalEmissionsController.js";
+import { postCapitalProject } from "../controllers/capitalProjectController.js";
+import { postCapitalProjectInputs } from "../controllers/capitalProjectInputsController.js";
+import { postPermit } from "../controllers/permitsController.js";
+import { readEnvironmentalPermits } from "../controllers/environmentalPermitsController.js";
 const router = express.Router();
 
 // Ruta para crear una nueva actividad
@@ -83,6 +89,11 @@ router.post(
 );
 router.post("/project-inputs", requireToken, postProjectInputs);
 router.post('/project-areas', postProjectArea);
+router.post('/credit-beneficiary-environmental-info', postCreditBeneficiaryEnvironmentalInfo);
+router.post('/capital-emissions', postProjectCapitalEmissions);
+router.post('/capital-project', postCapitalProject);
+router.post('/capital-project-inputs', postCapitalProjectInputs);
+router.post('/permit', postPermit);
 // Ruta para leer  datos (get) que no requiere token
 router.get("/documentTypes", readDocumentTypes);
 
@@ -95,10 +106,11 @@ router.get("/beneficiary", requireToken, readBeneficiary);
 router.get("/beneficiary/:userId", requireToken, getBeneficiaryDetails);
 router.get("/locations", readLocations);
 router.get("/land-uses", readLandUses);
-router.get("/soil-types", readSoilTypes);
+// router.get("/soil-types", readSoilTypes);
 router.get("/type-categories", readTypeCategories);
 router.get("/environmental-management/:id", getEnvironmentalManagementDetails);
 router.get('/areas-of-interest', readAreasOfInterest);
+router.get('/environmental-permits', readEnvironmentalPermits);
 //ruta informacion usuario - perfil
 router.get("/profile", requireToken, profile);
 
