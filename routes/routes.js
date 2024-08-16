@@ -106,7 +106,7 @@ router.get("/beneficiary", requireToken, readBeneficiary);
 router.get("/beneficiary/:userId", requireToken, getBeneficiaryDetails);
 router.get("/locations", readLocations);
 router.get("/land-uses", readLandUses);
-// router.get("/soil-types", readSoilTypes);
+ router.get("/soil-types", readSoilTypes);
 router.get("/type-categories", readTypeCategories);
 router.get("/environmental-management/:id", getEnvironmentalManagementDetails);
 router.get('/areas-of-interest', readAreasOfInterest);
