@@ -1,4 +1,4 @@
-import environmental_social_info from '../models/environmental_social_info.js';
+import environmental_social_info from '../models/envioronmental_social_info.js';
 
 // Obtener todos los registros de información ambiental y social
 export const readEnvironmentalSocialInfo = async (req, res) => {
