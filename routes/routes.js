@@ -53,6 +53,7 @@ import { postCapitalProject } from "../controllers/capitalProjectController.js";
 import { postCapitalProjectInputs } from "../controllers/capitalProjectInputsController.js";
 import { postPermit } from "../controllers/permitsController.js";
 import { readEnvironmentalPermits } from "../controllers/environmentalPermitsController.js";
+import { createCommitment } from "../controllers/comitmentsController.js";
 const router = express.Router();
 
 // Ruta para crear una nueva actividad
@@ -80,6 +81,7 @@ router.post(
   requireToken,
   postCommunityHealthSafety
 );
+router.post('/commitment',requireToken,createCommitment)
 router.post(
   "/project-emissions-waste",
   requireToken,
