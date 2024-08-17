@@ -19,7 +19,7 @@ import sequelize from '../database/connectdb.js';
         allowNull: false,
       },
       proj_id: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.STRING,
         allowNull: false,
       }
     

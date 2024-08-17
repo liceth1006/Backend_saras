@@ -20,7 +20,7 @@ import {
 import { readExclusions } from "../controllers/exclusionsController.js";
 import { readDocumentTypes } from "../controllers/documentTypesController.js";
 import { readCommitments } from "../controllers/comitmentsController.js";
-import { readEnvironmentalSocialInfo} from"../controllers/environmental_social_infoController.js";
+//import { readEnvironmentalSocialInfo} from"../controllers/environmental_social_infoController.js";
 import {
   getBeneficiaryDetails,
   postBeneficiaryInformation,
@@ -99,7 +99,7 @@ router.post('/permit', postPermit);
 // Ruta para leer  datos (get) que no requiere token
 router.get("/documentTypes", readDocumentTypes);
 router.get("/commitments", requireToken, readCommitments);
-router.get("/environmental_social_info", readEnvironmentalSocialInfo)
+//router.get("/environmental_social_info", readEnvironmentalSocialInfo)
 // Ruta para leer  datos (get) que requiere token
 router.get("/activity", requireToken, readActivity);
 router.get("/exclusions", requireToken, readExclusions);

@@ -4,10 +4,11 @@ import 'dotenv/config';
 //datos de conexion a la base de datos
 const sequelize = new Sequelize({
   dialect: 'mysql',
-  host: process.env.DB_HOST,
-  username: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: "localhost",
+  username: "root",
+  password: "",
+  database: "saras",
+  port:"3307",
   logging: console.log
 });
 
