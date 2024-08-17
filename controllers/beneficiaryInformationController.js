@@ -77,7 +77,7 @@ export const getBeneficiaryDetails = async (req, res) => {
     }
 
     // Ejecuta el procedimiento almacenado
-    const results = await sequelize.query('CALL GetBeneficiaryDetails(:userId)', {
+    const results = await sequelize.query('CALL obtener_beneficiarios(:userId)', {
       replacements: { userId: parsedUserId },
     });
 
@@ -87,6 +87,28 @@ export const getBeneficiaryDetails = async (req, res) => {
     }
 
     // Responde con los resultados
+    return res.json(results);
+  } catch (error) {
+    console.error("Error al recuperar los detalles del beneficiario:", error.message);
+    console.error("Stack trace:", error.stack);
+    return res.status(500).json({ error: "Error del servidor", details: error.message });
+  }
+};
+
+export const getBeneficiaryAll = async (req, res) => {
+  try {
+    // Ejecuta el procedimiento almacenado
+    const results = await sequelize.query('CALL obtener_beneficiarios_todos()', {
+     
+    });
+console.log(results)
+console.log("Tipo de results:", typeof results);
+    // Verifica si hay resultados y maneja la estructura del resultado adecuadamente
+    if (!results || results.length === 0) {
+      return res.status(404).json({ error: "No se encontró información" });
+    }
+
+    // Responde con todos los resultados
     return res.json(results);
   } catch (error) {
     console.error("Error al recuperar los detalles del beneficiario:", error.message);

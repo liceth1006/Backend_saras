@@ -6,8 +6,8 @@ export const generateToken = (userId) => {
   if (!process.env.JWT_SECRET) {
     throw new Error('JWT_SECRET not defined');
   }
-  const token = jwt.sign({ use_id: userId }, process.env.JWT_SECRET, { expiresIn: 900 });
-  return { token, expiresIn: 900 };
+  const token = jwt.sign({ use_id: userId }, process.env.JWT_SECRET, { expiresIn: 9000 });
+  return { token, expiresIn: 9000 };
 };
 export const generateRefreshToken = (userId, res) => {
   if (!process.env.JWT_REFRESH_SECRET) {
